@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AmmuCare™ ❤️</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Segoe UI',sans-serif;
+}
+
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#f7f4ff,#fff8f5);
+    overflow-x:hidden;
+    color:#444;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:40px 20px;
+    text-align:center;
+}
+
+h1{
+    color:#7b61ff;
+    margin-bottom:15px;
+    font-size:2.8rem;
+}
+
+.subtitle{
+    font-size:1.1rem;
+    line-height:1.7;
+    margin-bottom:30px;
+}
+
+.card{
+    background:white;
+    border-radius:24px;
+    padding:25px;
+    margin:20px 0;
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+}
+
+.btn{
+    background:#7b61ff;
+    color:white;
+    border:none;
+    padding:14px 24px;
+    border-radius:999px;
+    cursor:pointer;
+    margin:10px;
+    font-size:1rem;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+}
+
+.message-box{
+    margin-top:20px;
+    font-size:1.2rem;
+    min-height:80px;
+    line-height:1.6;
+}
+
+.stats{
+    text-align:left;
+    margin-top:15px;
+    line-height:2;
+}
+
+.progress{
+    width:100%;
+    height:18px;
+    background:#eee;
+    border-radius:50px;
+    overflow:hidden;
+    margin:10px 0;
+}
+
+.progress-fill{
+    height:100%;
+    width:70%;
+    background:linear-gradient(90deg,#8d7aff,#c7bfff);
+    transition:1s;
+}
+
+.mood-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:12px;
+    margin-top:15px;
+}
+
+.mood-btn{
+    padding:16px;
+    border:none;
+    border-radius:18px;
+    background:#f3f0ff;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.mood-btn:hover{
+    transform:scale(1.05);
+}
+
+.note{
+    display:inline-block;
+    padding:12px 18px;
+    margin:10px;
+    background:#fff;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,.08);
+}
+
+.hidden{
+    display:none;
+}
+
+.letter{
+    margin-top:20px;
+    padding:20px;
+    background:#fff7fd;
+    border-radius:20px;
+    line-height:1.8;
+}
+
+.heart{
+    position:fixed;
+    font-size:20px;
+    animation:floatUp 3s linear forwards;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+    0%{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
+    100%{
+        opacity:0;
+        transform:translateY(-300px) scale(1.8);
+    }
+}
+
+.bg-heart{
+    position:fixed;
+    color:rgba(123,97,255,.08);
+    animation:drift 15s linear infinite;
+    pointer-events:none;
+}
+
+@keyframes drift{
+    from{
+        transform:translateY(100vh);
+    }
+    to{
+        transform:translateY(-120px);
+    }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<h1>🌷 AmmuCare™ 🌷</h1>
+
+<p class="subtitle">
+Hey Ammu ❤️<br><br>
+I know these days can feel a little tougher than usual.
+So I made you a tiny corner of the internet where you can
+rest, smile, complain freely, and remember that you're loved.
+</p>
+
+<div class="card">
+    <h2>🤗 Emergency Comfort Station</h2>
+
+    <button class="btn" onclick="sendHug()">
+        I Need A Hug
+    </button>
+
+    <div class="message-box" id="hugMessage"></div>
+</div>
+
+<div class="card">
+    <h2>💜 Current Status</h2>
+
+    <div class="stats">
+        Comfort Level
+        <div class="progress">
+            <div class="progress-fill" id="comfortBar"></div>
+        </div>
+
+        Chocolate Requirement: Critical 🍫<br>
+        Need For Hugs: Maximum 🤗
+    </div>
+</div>
+
+<div class="card">
+    <h2>🌈 How Are We Feeling Today?</h2>
+
+    <div class="mood-grid">
+        <button class="mood-btn"
+        onclick="showMood('pain')">
+        😭 Everything hurts
+        </button>
+
+        <button class="mood-btn"
+        onclick="showMood('angry')">
+        😒 Don't talk to me
+        </button>
+
+        <button class="mood-btn"
+        onclick="showMood('cuddle')">
+        🥺 Need cuddles
+        </button>
+
+        <button class="mood-btn"
+        onclick="showMood('tired')">
+        😴 Tired
+        </button>
+    </div>
+
+    <div class="message-box" id="moodResponse"></div>
+</div>
+
+<div class="card">
+    <h2>🌸 Little Notes For You</h2>
+
+    <div class="note">Drink some water ❤️</div>
+    <div class="note">Take it easy today 🌷</div>
+    <div class="note">You're doing great 🤍</div>
+    <div class="note">Rest is productive too 🌙</div>
+    <div class="note">I'm proud of you 🫶</div>
+</div>
+
+<div class="card">
+    <h2>🔐 Open When Cramps Are Winning</h2>
+
+    <button class="btn" onclick="openLetter()">
+        Open Secret Letter
+    </button>
+
+    <div id="secretLetter" class="letter hidden">
+        Dear Ammu ❤️<br><br>
+
+        I know I can't magically make the pain disappear.
+        Trust me, if I could, I would steal every cramp
+        and keep it for myself.<br><br>
+
+        Until then, I'll settle for reminding you to eat,
+        drink water, rest properly, and sending hugs
+        whether you asked for them or not. 🤗<br><br>
+
+        You're strong, beautiful, stubborn, adorable,
+        and loved more than you know.<br><br>
+
+        So today your only job is to be kind to yourself.
+        The rest can wait.<br><br>
+
+        Love,<br>
+        Praroop ❤️
+    </div>
+</div>
+
+</div>
+
+<script>
+
+const hugs = [
+"Sending one emergency hug from Praroop 🤗",
+"Today's goal is survival, not perfection ❤️",
+"You are loved, even when you're grumpy 😌",
+"Pain: 1, Ammu: 999 💪",
+"Official permission to do absolutely nothing today 🌷",
+"Your body is working hard. Be gentle with yourself ❤️",
+"Chocolate is basically medicine today 🍫"
+];
+
+let comfort = 70;
+
+function sendHug(){
+
+const msg =
+hugs[Math.floor(Math.random()*hugs.length)];
+
+document.getElementById("hugMessage").innerHTML=msg;
+
+comfort=Math.min(100,comfort+5);
+document.getElementById("comfortBar").style.width=
+comfort+"%";
+
+for(let i=0;i<15;i++){
+
+const heart=document.createElement("div");
+
+heart.className="heart";
+heart.innerHTML=["❤️","💜","🌷","🫶"][Math.floor(Math.random()*4)];
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.top="80vh";
+
+document.body.appendChild(heart);
+
+setTimeout(()=>{
+heart.remove();
+},3000);
+}
+
+navigator.vibrate?.(150);
+}
+
+function showMood(type){
+
+const responses={
+pain:"That's okay. Today's mission is survival, not perfection. Take things one step at a time ❤️",
+angry:"Understood. Deploying snacks and keeping a safe distance 😌🍫",
+cuddle:"Virtual cuddle incoming. Wrapping you in the softest blanket imaginable 🤗",
+tired:"Then rest. Your body deserves it. Everything else can wait 🌙"
+};
+
+document.getElementById("moodResponse").innerHTML=
+responses[type];
+}
+
+function openLetter(){
+document.getElementById("secretLetter")
+.classList.remove("hidden");
+}
+
+function createBackgroundHeart(){
+
+const h=document.createElement("div");
+
+h.className="bg-heart";
+h.innerHTML=["💜","🌷","✨","🤍"][Math.floor(Math.random()*4)];
+
+h.style.left=Math.random()*100+"vw";
+h.style.fontSize=(20+Math.random()*25)+"px";
+
+document.body.appendChild(h);
+
+setTimeout(()=>{
+h.remove();
+},15000);
+}
+
+setInterval(createBackgroundHeart,1200);
+
+</script>
+
+</body>
+</html>
